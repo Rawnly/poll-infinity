@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(http-equiv="X-UA-Compatible", content="ie=edge")
+
+		title Infinity War Poll :: Vote
+
+		link(rel="stylesheet", href="/css/master.css")
+	body
+		.container.center
+			form(action="/vote", method="POST")
+				input(type="hidden", value=ip, name="ip")
+
+				.form-group
+					input(required="true", name="email", type="email", placeholder="email").form-input
+				p Seleziona un orario
+				.form-group
+					input(required="true", type="radio", id="vote1", name="vote", value="18:30")
+					label(for="vote1") 18.30
+				.form-group
+					input(required="true", type="radio", id="vote2", name="vote", value="21:30")
+					label(for="vote2") 21.30
+
+				input(required="true", type="submit", style="float: right")
+
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+	script(src="/page.js")
