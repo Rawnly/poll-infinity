@@ -44,7 +44,7 @@ require('babel-polyfill');
 _mongoose2.default.log = console.log.bind(console, (0, _chalk2.default)(_templateObject));
 _mongoose2.default.Promise = global.Promise;
 
-_mongoose2.default.connect('mongodb://127.0.0.1/local');
+_mongoose2.default.connect('mongodb://127.0.0.1/infinity-poll');
 var dbConnection = _mongoose2.default.connection;
 
 dbConnection.on('connected', function () {
@@ -84,7 +84,7 @@ app.use(_express2.default.static((0, _path.join)(__dirname, 'public')));
 
 app.get('/', function (req, res) {
 	res.render('index', {
-		ip: getIP(req)
+		ip: '0.0.0.0'
 	});
 });
 
@@ -157,10 +157,6 @@ app.listen(port, function () {
 	console.log((0, _chalk2.default)(_templateObject2, port));
 	console.log();
 });
-
-function getIP(req) {
-	return req.headers['x-forwarded-for'] || req.connection.remoteAddress || false;
-}
 
 function matchText(string) {
 	var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},

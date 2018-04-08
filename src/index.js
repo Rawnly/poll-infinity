@@ -17,7 +17,7 @@ import chalk from 'chalk';
 mongoose.log = console.log.bind(console, chalk `{bold {yellow Mongoose}}: `)
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://127.0.0.1/infinity-poll');
+mongoose.connect('mongodb://127.0.0.1/infinity-polls');
 const dbConnection = mongoose.connection;
 
 dbConnection.on('connected', () => {
@@ -29,7 +29,7 @@ dbConnection.on('disconnected', () => {
 })
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8085;
 const app = express();
 const pollSchema = Schema({
 	ip: String,
@@ -58,7 +58,7 @@ app.use(express.static(join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
 	res.render('index', {
-		ip: getIP(req)
+		ip: '0.0.0.0'
 	})
 })
 
@@ -115,7 +115,8 @@ app.post('/vote', (req, res) => {
 			} else {
 				PollVote.create({
 					vote,
-					email
+					email,
+					ip
 				}, err => {
 					if (err) {
 						res.send({
