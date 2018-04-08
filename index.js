@@ -44,7 +44,7 @@ require('babel-polyfill');
 _mongoose2.default.log = console.log.bind(console, (0, _chalk2.default)(_templateObject));
 _mongoose2.default.Promise = global.Promise;
 
-_mongoose2.default.connect('mongodb://127.0.0.1/infinity-poll');
+_mongoose2.default.connect('mongodb://127.0.0.1/infinity-polls');
 var dbConnection = _mongoose2.default.connection;
 
 dbConnection.on('connected', function () {
@@ -55,7 +55,7 @@ dbConnection.on('disconnected', function () {
 	_mongoose2.default.log('disconnected');
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8085;
 var app = (0, _express2.default)();
 var pollSchema = (0, _mongoose.Schema)({
 	ip: String,
@@ -137,7 +137,8 @@ app.post('/vote', function (req, res) {
 		} else {
 			PollVote.create({
 				vote: vote,
-				email: email
+				email: email,
+				ip: ip
 			}, function (err) {
 				if (err) {
 					res.send({
